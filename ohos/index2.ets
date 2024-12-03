@@ -13,5 +13,5 @@
 * limitations under the License.
 */
 
-import FlutterVibratePlugin from './src/main/ets/components/plugin/FlutterVibratePlugin';
-export default FlutterVibratePlugin;
+import VibratePlugin from './src/main/ets/components/plugin/VibratePlugin';
+export default VibratePlugin;

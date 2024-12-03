@@ -1,23 +1,18 @@
-import {
-  FlutterPlugin,
-  FlutterPluginBinding,
-  MethodCall,
-  MethodCallHandler,
-  MethodChannel,
-  MethodResult,
-} from '@ohos/flutter_ohos';
+import { FlutterPlugin, FlutterPluginBinding, MethodCall, MethodCallHandler, MethodChannel,
+  MethodResult } from "@ohos/flutter_ohos";
 import vibrator from "@ohos.vibrator";
-import { BusinessError } from '@kit.BasicServicesKit';
+import { BusinessError } from "@kit.BasicServicesKit";
 
-/** FlutterVibratePlugin **/
-export default class FlutterVibratePlugin implements FlutterPlugin, MethodCallHandler {
+/** VibratePlugin **/
+export default class VibratePlugin implements FlutterPlugin, MethodCallHandler {
   private channel: MethodChannel | null = null;
   hasVibrator: boolean = false;
+
   constructor() {
   }
 
   getUniqueClassName(): string {
-    return "FlutterVibratePlugin"
+    return "VibratePlugin"
   }
 
   onAttachedToEngine(binding: FlutterPluginBinding): void {
@@ -31,28 +26,33 @@ export default class FlutterVibratePlugin implements FlutterPlugin, MethodCallHa
       this.channel.setMethodCallHandler(null)
     }
   }
+
   vibrate(duration: number): void {
-    vibrator.startVibration({
-      type: 'time',
-      duration: duration,
-    }, {
-      id: 0,
-      usage: 'alarm'
-    }, (error: BusinessError) => {
-      if (error) {
-        console.error(`Failed to start vibration. Code: ${error.code}, message: ${error.message}`);
-        return;
-      }
-      console.info('Succeed in starting vibration');
-    });
+    try {
+      vibrator.startVibration({
+        type: 'time',
+        duration: duration,
+      }, {
+        id: 0,
+        usage: 'alarm'
+      }, (error: BusinessError) => {
+        if (error) {
+          console.error(`Failed to start vibration. Code: ${error.code}, message: ${error.message}`);
+          return;
+        }
+        console.info('Succeed in starting vibration');
+      });
+    } catch (e) {
+    }
   }
+
   onMethodCall(call: MethodCall, result: MethodResult): void {
     switch (call.method) {
       case "canVibrate":
         result.success(true);
         break;
       case "vibrate":
-        let duration:number = call.argument("duration");
+        let duration = call.argument("duration") as number;
         this.vibrate(duration);
         result.success(null);
         break;

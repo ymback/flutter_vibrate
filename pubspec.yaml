@@ -25,4 +25,4 @@ flutter:
         pluginClass: VibratePlugin
       ohos:
         package: flutter.plugins.vibrate
-        pluginClass: FlutterVibratePlugin
+        pluginClass: VibratePlugin
