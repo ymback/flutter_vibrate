@@ -22,7 +22,6 @@ rootProject.allprojects {
 apply plugin: 'com.android.library'
 
 android {
-    namespace "flutter.plugins.vibrate"
     compileSdkVersion 30
 
     defaultConfig {
