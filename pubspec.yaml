@@ -23,3 +23,6 @@ flutter:
         pluginClass: VibratePlugin
       ios:
         pluginClass: VibratePlugin
+      ohos:
+        package: flutter.plugins.vibrate
+        pluginClass: FlutterVibratePlugin

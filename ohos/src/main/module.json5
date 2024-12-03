@@ -1,0 +1,10 @@
+{
+  "module": {
+    "name": "flutter_vibrate",
+    "type": "har",
+    "deviceTypes": [
+      "default",
+      "tablet"
+    ]
+  }
+}
